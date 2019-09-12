@@ -35,9 +35,8 @@ def main(stdscr, height, width):
     #set the screen up
     shake(height, width, stdscr, blankChar)
 
-    stdscr.addstr(position[1], position[0], cursor)
-
     while True:
+        stdscr.addstr(position[1], position[0], cursor)
         curse = stdscr.getch(height-1, width-1)
         if curse == curses.KEY_UP:
             if(position[1] > 0):
