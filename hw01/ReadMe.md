@@ -8,3 +8,8 @@ ECE434 Homework 1
 5) I have joined both Google Groups
 6) My Etch-A-Sketch program is contained in this folder, run via ./EtchASketch
 
+## Prof. Yoder's comments
+
+Everything looks good.  Nice etch-a-sketch.
+
+Grade:  10/10
