@@ -6,12 +6,12 @@
 
 import Adafruit_BBIO.GPIO as GPIO
 
-toggs = "GP9_14"
+toggs = "P9_14"
 
-GPIO.setup(LED, GPIO.OUT)
+GPIO.setup(toggs, GPIO.OUT)
 
 while 1:
-    GPIO.output(toggs, 1)
-    GPIO.output(toggs, 0)
+    GPIO.output(toggs, GPIO.HIGH)
+    GPIO.output(toggs, GPIO.LOW)
 
     
