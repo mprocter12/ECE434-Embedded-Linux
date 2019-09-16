@@ -9,8 +9,8 @@ import Adafruit_BBIO.GPIO as GPIO
 
 
 # Setup variables for the buttons and LEDS
-btn1 = "P9_11"
-btn2 = "P9_13"
+btn1 = "P9_16"
+btn2 = "P9_18"
 btn3 = "P9_15"
 btn4 = "P9_17"
 LED1 = "P9_19"
@@ -18,7 +18,7 @@ LED2 = "P9_20"
 LED3 = "P9_21"
 LED4 = "P9_22"
 
-buttons2LEDS = {btn1: LED1, btn2: LED2, btn3: LED3, btn4: LED4}
+buttons2LEDS = {btn1 : LED1, btn2 : LED2, btn3 : LED3, btn4 : LED4}
 
 GPIO.setup(LED1, GPIO.OUT)
 GPIO.setup(LED2, GPIO.OUT)
@@ -30,7 +30,7 @@ GPIO.setup(btn3, GPIO.IN)
 GPIO.setup(btn4, GPIO.IN)
 
 def turnOnLED(button):
-    state = GPIO.input(button)
+    #state = GPIO.input(button)
     GPIO.output(map[button], state)
 
 # Turn LEDs off
