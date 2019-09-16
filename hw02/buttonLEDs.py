@@ -31,7 +31,7 @@ GPIO.setup(btn4, GPIO.IN)
 
 def turnOnLED(button):
     state = GPIO.input(button)
-    GPIO.output(map{button}, state)
+    GPIO.output(map[button], state)
 
 # Turn LEDs off
 GPIO.output(led1, 0)
