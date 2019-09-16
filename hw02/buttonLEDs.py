@@ -8,6 +8,10 @@
 import Adafruit_BBIO.GPIO as GPIO
 import time
 
+def turnOnLED(button):
+    print("Button Pressed: ", button)
+    state = GPIO.input(button)
+    GPIO.output(buttons2LEDS[button], state)
 
 # Setup variables for the buttons and LEDS
 btn1 = "P9_11"
@@ -40,11 +44,6 @@ GPIO.add_event_detect(btn1, GPIO.BOTH, callback=turnOnLED)
 GPIO.add_event_detect(btn2, GPIO.BOTH, callback=turnOnLED)
 GPIO.add_event_detect(btn3, GPIO.BOTH, callback=turnOnLED)
 GPIO.add_event_detect(btn4, GPIO.BOTH, callback=turnOnLED)
-
-def turnOnLED(button):
-    print("Button Pressed: ", button)
-    state = GPIO.input(button)
-    GPIO.output(buttons2LEDS[button], state)
 
 try:
     while 1:
