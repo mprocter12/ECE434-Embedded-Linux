@@ -13,17 +13,17 @@ btn1 = "P9_11"
 btn2 = "P9_13"
 btn3 = "P9_15"
 btn4 = "P9_17"
-led1 = "P9_19"
-led2 = "P9_20"
-led3 = "P9_21"
-led4 = "P9_22"
+LED1 = "P9_19"
+LED2 = "P9_20"
+LED3 = "P9_21"
+LED4 = "P9_22"
 
-buttons2LEDS = {btn1: led1, btn2: led2, btn3: led3, btn4: led4}
+buttons2LEDS = {btn1: LED1, btn2: LED2, btn3: LED3, btn4: LED4}
 
-GPIO.setup(led1, GPIO.OUT)
-GPIO.setup(led2, GPIO.OUT)
-GPIO.setup(led3, GPIO.OUT)
-GPIO.setup(led4, GPIO.OUT)
+GPIO.setup(LED1, GPIO.OUT)
+GPIO.setup(LED2, GPIO.OUT)
+GPIO.setup(LED3, GPIO.OUT)
+GPIO.setup(LED4, GPIO.OUT)
 GPIO.setup(btn1, GPIO.IN)
 GPIO.setup(btn2, GPIO.IN)
 GPIO.setup(btn3, GPIO.IN)
@@ -34,10 +34,10 @@ def turnOnLED(button):
     GPIO.output(map[button], state)
 
 # Turn LEDs off
-GPIO.output(led1, 0)
-GPIO.output(led2, 0)
-GPIO.output(led3, 0)
-GPIO.output(led4, 0)
+GPIO.output(LED1, 0)
+GPIO.output(LED2, 0)
+GPIO.output(LED3, 0)
+GPIO.output(LED4, 0)
 
 GPIO.add_event_detect(btn1, GPIO.BOTH, callback=turnOnLED)
 GPIO.add_event_detect(btn2, GPIO.BOTH, callback=turnOnLED)
