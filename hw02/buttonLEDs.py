@@ -8,14 +8,14 @@
 import Adafruit_BBIO.GPIO as GPIO
 import time
 
-def turnOnLED(button):
-    print("Button Pressed: ", button)
-    state = GPIO.input(button)
-    GPIO.output(buttons2LEDS[button], state)
+def turnOnLED(channel):
+    print("Button Pressed: ", channel)
+    state = GPIO.input(channel)
+    GPIO.output(buttons2LEDS[channel], state)
 
 # Setup variables for the buttons and LEDS
-btn1 = "P9_11"
-btn2 = "P9_13"
+btn1 = "P9_16"
+btn2 = "P9_18"
 btn3 = "P9_15"
 btn4 = "P9_17"
 LED1 = "P9_19"
