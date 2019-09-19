@@ -14,14 +14,14 @@ def turnOnLED(channel):
     GPIO.output(buttons2LEDS[channel], state)
 
 # Setup variables for the buttons and LEDS
-btn1 = "P9_16"
-btn2 = "P9_18"
-btn3 = "P9_15"
-btn4 = "P9_17"
-LED1 = "P9_19"
-LED2 = "P9_20"
-LED3 = "P9_21"
-LED4 = "P9_22"
+btn1 = "P9_11"
+btn2 = "P9_12"
+btn3 = "P9_13"
+btn4 = "P9_14"
+LED1 = "P9_15"
+LED2 = "P9_16"
+LED3 = "P9_17"
+LED4 = "P9_18"
 
 buttons2LEDS = {btn1: LED1, btn2: LED2, btn3: LED3, btn4: LED4}
 

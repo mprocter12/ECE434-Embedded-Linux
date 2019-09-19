@@ -7,7 +7,7 @@
 import sys
 import curses
 import time
-import Adafruit_BBIO as GPIO
+import Adafruit_BBIO.GPIO as GPIO
 
 
 def shake(height, width, stdscr, blankChar):
@@ -24,30 +24,10 @@ def shake(height, width, stdscr, blankChar):
             #end for x
         #end for y
 
-def leftButton(channel):
-    global goLeft
-    state = GPIO.input(channel)
-    goLeft = state
-
-def rightButton(channel):
-    global goRight
-    state = GPIO.input(channel)
-    goRight = state
-
-def upButton(channel):
-    global goUp
-    state = GPIO.input(channel)
-    goUp = state
-
-def downButton(channel):
-    global goDown
-    state = GPIO.input(channel)
-    goDown = state
-
 
 def main(stdscr, height, width):
 
-    global goLeft, goRight, goUp, goDown
+    # global goLeft, goRight, goUp, goDown
     
     position = [0,0]
     blankChar = "8"
@@ -55,57 +35,49 @@ def main(stdscr, height, width):
     cursor = "*"
     stdscr = curses.initscr()
     prevSpots = list(position)
-    btn1 = "P9_16"
-    btn2 = "P9_18"
-    btn3 = "P9_15"
-    btn4 = "P9_17"
-
-    GPIO.setup(btn1, GPIO.IN)
-    GPIO.setup(btn2, GPIO.IN)
-    GPIO.setup(btn3, GPIO.IN)
-    GPIO.setup(btn4, GPIO.IN)
-
-    GPIO.add_event_detect(btn1, GPIO.BOTH, callback=upButton)
-    GPIO.add_event_detect(btn2, GPIO.BOTH, callback=downButton)
-    GPIO.add_event_detect(btn3, GPIO.BOTH, callback=leftButton)
-    GPIO.add_event_detect(btn4, GPIO.BOTH, callback=rightButton)
 
     #set the screen up
     shake(height, width, stdscr, blankChar)
 
     while True:
         stdscr.addstr(position[1], position[0], cursor)
-        curse = stdscr.getch(height-1, width-1)
-        if goUp == 1:
-            if(position[1] > 0):
-                position[1] -= 1
-        elif goDown == 1:
-            if(position[1] < height -1):
-                position[1] += 1
-        elif goLeft == 1:
-            if(position[0] > 0):
-                position[0] -= 1
-        elif goRight == 1:
-            if(position[0] < width -1):
-                position[0] += 1
-        elif curse == ord('q'):
+        if GPIO.input(btn1) and GPIO.input(btn2):
             break
-        elif curse == ord('s'):
+        elif GPIO.input(btn3) and GPIO.input(btn4):
             shake(height, width, stdscr,blankChar)
             prevSpots = list(position)
             continue
+        elif GPIO.input(btn1):
+            if(position[1] > 0):
+                position[1] -= 1
+        elif GPIO.input(btn2):
+            if(position[1] < height -1):
+                position[1] += 1
+        elif GPIO.input(btn3):
+            if(position[0] > 0):
+                position[0] -= 1
+        elif GPIO.input(btn4):
+            if(position[0] < width -1):
+                position[0] += 1
+        
 
         stdscr.addstr(prevSpots[1], prevSpots[0], drawnChar)
         prevSpots = list(position)
+        stdscr.refresh()
+        time.sleep(0.1)
     #end while
 
 #end main
 
+btn1 = "P9_11"
+btn2 = "P9_12"
+btn3 = "P9_13"
+btn4 = "P9_14"
 
-goDown = 0
-goLeft = 0
-goUp = 0
-goRight = 0
+GPIO.setup(btn1, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+GPIO.setup(btn2, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+GPIO.setup(btn3, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+GPIO.setup(btn4, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
 
 print("The following describe the instructions to play Etch-A-Sketch: " +
     "To draw on the screen use your arrow keys, the cursor will appear as a *. " +
