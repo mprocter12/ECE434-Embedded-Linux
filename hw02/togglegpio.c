@@ -8,10 +8,13 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include "gpio-utils.h"
+#include "gpio-utils.c"
 
 int main()
 {
-    toggle = 0;
+    int toggle = 0;
+    int gpio = 14;
+    int gpio_fd;
     gpio_export(gpio);
 	
 	//SET DIRECTION
@@ -23,6 +26,8 @@ int main()
     {
         toggle = !toggle;
         gpio_set_value(gpio, toggle);
+        //Pause for a while
+		usleep(100);
     }
 
     gpio_fd_close(gpio_fd);
