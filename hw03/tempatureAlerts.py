@@ -12,8 +12,14 @@ def handleTempAlarm(alert):
     print("Alert Signal Received")
     if(alert==ALRM[0]):
         print('Temperature alarm triggered at: ' + str(bus.read_byte_data(tempSensors[0], 0)))
+    if(GPIO.input(ALRM[0])):
+        print('Temparture alarm returned to normal')
     if(alert==ALRM[1]):
         print('Temperature alarm triggered at: ' + str(bus.read_byte_data(tempSensors[1], 0)))
+    if(GPIO.input(ALRM[1])):
+        print('Temparture alarm returned to normal')
+        
+        
 
 
 # temp sensor setup
@@ -27,7 +33,7 @@ for alarm in ALRM:
     GPIO.add_event_detect(alarm, GPIO.BOTH, callback=handleTempAlarm)
     
 for address in tempSensors:
-    bus.write_byte_data(address, 3, 26)
+    bus.write_byte_data(address, 3, 25)
     bus.write_byte_data(address, 2, 24)
 
 while True:
