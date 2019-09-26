@@ -11,11 +11,18 @@ import time
 def handleTempAlarm(alert):
     print("Alert Signal Received")
     if(alert==ALRM[0]):
-        print('Temperature alarm triggered at: ' + str(bus.read_byte_data(tempSensors[0], 0)))
+        tempC0 = bus.read_byte_data(tempSensors[0], 0)
+        tempF0 = tempC0*(9/5)+32
+        print('Temperature alarm triggered at: ' + str(tempF0) + ' degrees Fahrenheit')
+        
     if(GPIO.input(ALRM[0])):
         print('Temparture alarm returned to normal')
+        
     if(alert==ALRM[1]):
-        print('Temperature alarm triggered at: ' + str(bus.read_byte_data(tempSensors[1], 0)))
+        tempC1 = bus.read_byte_data(tempSensors[1], 0)
+        tempF1 = tempC1*(9/5)+32
+        print('Temperature alarm triggered at: ' + str(tempF1) + ' degrees Fahrenhei')
+        
     if(GPIO.input(ALRM[1])):
         print('Temparture alarm returned to normal')
         
