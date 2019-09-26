@@ -13,3 +13,10 @@ Homework 3
 - Modified my EtchASketch.py to use the LED matrix and the rotarty enconders.
 	- The left encoder controls horizontal movement and the right encoder controls vertical movement
 	- When you exit the game with Ctrl+C, the screen will clear
+
+
+## Prof. Yoder's comments
+
+Looks good.  
+
+Grade:  10/10
