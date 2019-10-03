@@ -26,7 +26,7 @@ void signal_handler(int sig)
 	keepgoing = 0;
 }
 
-int main(int argc, char *argv[]) {
+int main() {
     volatile void *gpio0_addr;
     volatile void *gpio1_addr;
     volatile unsigned int *gpio0_datain;
@@ -49,8 +49,10 @@ int main(int argc, char *argv[]) {
     gpio0_addr = mmap(0, GPIO0_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd, GPIO0_START_ADDR);
 
     gpio0_oe_addr           = gpio0_addr + GPIO_OE;
+    gpio0_datain            = gpio0_addr + GPIO_DATAIN;
     gpio0_setdataout_addr   = gpio0_addr + GPIO_SETDATAOUT;
     gpio0_cleardataout_addr = gpio0_addr + GPIO_CLEARDATAOUT;
+    
 
     if(gpio0_addr == MAP_FAILED) {
         printf("Unable to map GPIO\n");
@@ -67,10 +69,12 @@ int main(int argc, char *argv[]) {
     gpio1_addr = mmap(0, GPIO1_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd, GPIO1_START_ADDR);
 
     gpio1_oe_addr           = gpio1_addr + GPIO_OE;
+    gpio1_datain            = gpio1_addr + GPIO_DATAIN;
     gpio1_setdataout_addr   = gpio1_addr + GPIO_SETDATAOUT;
     gpio1_cleardataout_addr = gpio1_addr + GPIO_CLEARDATAOUT;
+    
 
-    if(gpio_addr == MAP_FAILED) {
+    if(gpio1_addr == MAP_FAILED) {
         printf("Unable to map GPIO\n");
         exit(1);
     }
@@ -79,25 +83,21 @@ int main(int argc, char *argv[]) {
     printf("GPIO1 SETDATAOUTADDR mapped to %p\n", gpio1_setdataout_addr);
     printf("GPIO1 CLEARDATAOUT mapped to %p\n", gpio1_cleardataout_addr);
 
-  
     while(keepgoing) {
-
         if(*gpio0_datain & BTN1){
-            *gpio1_setdataout_addr |= USR2;
+            *gpio1_setdataout_addr = USR2;
     	} else {
-            *gpio1_cleardataout_addr &= ~USR2;
+            *gpio1_cleardataout_addr = USR2;
     	}
 
-        if(*gpio0_datain & BTN2){
-            *gpio1_setdataout_addr |= USR3;
+        if(*gpio1_datain & BTN2){
+            *gpio1_setdataout_addr = USR3;
     	} else {
-            *gpio1_cleardataout_addr &= ~USR3;
+            *gpio1_cleardataout_addr = USR3;
     	}
-
     }
 
     munmap((void *)gpio0_addr, GPIO0_SIZE);
     munmap((void *)gpio1_addr, GPIO1_SIZE);
     close(fd);
-    return 0;
 }
