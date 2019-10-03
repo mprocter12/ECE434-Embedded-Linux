@@ -56,10 +56,10 @@ int main(int argc, char *argv[]) {
         printf("Unable to map GPIO\n");
         exit(1);
     }
-    printf("GPIO mapped to %p\n", gpio0_addr);
-    printf("GPIO OE mapped to %p\n", gpio0_oe_addr);
-    printf("GPIO SETDATAOUTADDR mapped to %p\n", gpio0_setdataout_addr);
-    printf("GPIO CLEARDATAOUT mapped to %p\n", gpio0_cleardataout_addr);
+    printf("GPIO0 mapped to %p\n", gpio0_addr);
+    printf("GPIO0 OE mapped to %p\n", gpio0_oe_addr);
+    printf("GPIO0 SETDATAOUTADDR mapped to %p\n", gpio0_setdataout_addr);
+    printf("GPIO0 CLEARDATAOUT mapped to %p\n", gpio0_cleardataout_addr);
 
 
     printf("Mapping %X - %X (size: %X)\n", GPIO1_START_ADDR, GPIO1_END_ADDR, GPIO1_SIZE);
@@ -74,29 +74,30 @@ int main(int argc, char *argv[]) {
         printf("Unable to map GPIO\n");
         exit(1);
     }
-    printf("GPIO mapped to %p\n", gpio1_addr);
-    printf("GPIO OE mapped to %p\n", gpio1_oe_addr);
-    printf("GPIO SETDATAOUTADDR mapped to %p\n", gpio1_setdataout_addr);
-    printf("GPIO CLEARDATAOUT mapped to %p\n", gpio1_cleardataout_addr);
+    printf("GPIO1 mapped to %p\n", gpio1_addr);
+    printf("GPIO1 OE mapped to %p\n", gpio1_oe_addr);
+    printf("GPIO1 SETDATAOUTADDR mapped to %p\n", gpio1_setdataout_addr);
+    printf("GPIO1 CLEARDATAOUT mapped to %p\n", gpio1_cleardataout_addr);
 
-    // Set USR3 to be an output pin
-    reg = *gpio0_oe_addr;
-    printf("GPIO0 configuration: %X\n", reg);
-    reg &= ~USR3;       // Set USR3 bit to 0
-    *gpio0_oe_addr = reg;
-    printf("GPIO0 configuration: %X\n", reg);
-
-    printf("Start blinking LED USR3\n");
+  
     while(keepgoing) {
-        // printf("ON\n");
-        *gpio_setdataout_addr = USR3;
-        usleep(250000);
-        // printf("OFF\n");
-        *gpio_cleardataout_addr = USR3;
-        usleep(250000);
+
+        if(*gpio0_datain & BTN1){
+            *gpio1_setdataout_addr |= USR2;
+    	} else {
+            *gpio1_cleardataout_addr &= ~USR2;
+    	}
+
+        if(*gpio0_datain & BTN2){
+            *gpio1_setdataout_addr |= USR3;
+    	} else {
+            *gpio1_cleardataout_addr &= ~USR3;
+    	}
+
     }
 
-    munmap((void *)gpio_addr, GPIO1_SIZE);
+    munmap((void *)gpio0_addr, GPIO0_SIZE);
+    munmap((void *)gpio1_addr, GPIO1_SIZE);
     close(fd);
     return 0;
 }
