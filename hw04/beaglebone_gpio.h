@@ -23,4 +23,8 @@
 #define GPIO_03  (1<<3)
 #define GPIO_07  (1<<7)
 #define GPIO_60  (1<<28)
+
+#define BTN1 (1<<12)
+#define BTN2 (1<<26)
+
 #endif
