@@ -48,13 +48,16 @@
 # -----------------------
 # ------ includes -------
 # -----------------------
+-include ./path.mak
 
 
 
 # --------------------------------
 # ------ user-defined vars -------
 # --------------------------------
-
+CC := $(LINUXarm_GCC)
+CFLAGS := -g
+LINKER_FLAGS := -lstdc++
 
 
 # -----------------------
@@ -66,7 +69,8 @@
 # rule builds. In this solution, we only have one target.
 # However, in the final Beagle makefile, you'll see more
 # targets listed. 
-
+.PHONY : all
+all : app.arm
 
 
 
@@ -74,14 +78,18 @@
 # -----------------------------------
 # ------ executable rule (.x) -------
 # -----------------------------------
-
+app.arm : app.o
+	$(CC) $(CFLAGS) $(LINKER_FLAGS) $^ -o $@
+	@echo; echo $@ successfully created; echo
 
 
 
 # ---------------------------------------------------
 # ------ intermeditate object files rule (.o) -------
 # ---------------------------------------------------
-
+%.o : %.c
+	$(CC) $(CFLAGS) -c  $^ -o $@
+	@echo; echo $@ successfully created; echo
 
 
 
@@ -92,7 +100,10 @@
 # The "clean" rule should remove all files created by
 # the makefile (e.g. the executables and intermediate
 # files).
-
+.PHONY : clean
+clean :
+	rm -rf app.arm
+	rm -rf app.o
 	
 
 
@@ -105,6 +116,9 @@
 # We use test to print out the user-defined variables to
 # make sure they are set properly - this helps with 
 # debugging makefile errors.
+.PHONY : test
+test:
+	@echo CC = $(CC)
 
 
 	
