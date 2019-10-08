@@ -10,9 +10,9 @@ I will be working with Andy to make a smart mirror
 
 "gcc -g -c app.c -o app.o"
 
-*Target = *app.o
+*Target =* app.o
 
-*Dependency = *app.c
+*Dependency =* app.c
 
 *Command =* -g means symbolic debug and -c means compile but dont link
 
