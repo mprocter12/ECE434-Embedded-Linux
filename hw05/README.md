@@ -19,4 +19,8 @@ I will be working with Andy to make a smart mirror
 Makefile has been successfully updated following exercise 15
 
 
+## Prof. Yoder's comments
 
+Good start.  Much is missing.
+
+Grade:  2/10
