@@ -1,7 +1,5 @@
 Mark Procter
-
 ECE434
-
 Homework 6
 
 
@@ -17,3 +15,9 @@ Video Questions:
 9) Mainline is a single process that is running and can contain multiple threads that are being switched on and off the process
 10) Because of the architectual constraints, the CPU cannot disptach the interrupt until the read has finished
 11) Because preempt_disable was called, the interrupts are silenced until preempt_enable is called
+
+
+PREEMT_RT
+The file that was generated from my tests is entitled out.png, for a load I used the make and make clean from linux/modules folder from Dr. Yoder's exercises. 
+
+The graph entitled NoLoad.png shows the difference between the no-rt and the PREEMPT_RT without any load put on the system.
