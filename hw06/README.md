@@ -4,6 +4,7 @@ Homework 6
 
 
 Video Questions:
+
 1) Julia Cartwright is a Software Engineer at National Instruments
 2) PREEMPT_RT is known as "the rt patch" is a patchset ontop of the vanilla Linux kernel which helps provide bound timing guarantees for user task execution, a required property for any real-time application.
 3) Mixed criticality is when a system handles two levels of criticality, safety and non-safety, and run them at the same time
@@ -18,6 +19,7 @@ Video Questions:
 
 
 PREEMT_RT
-The file that was generated from my tests is entitled out.png, for a load I used the make and make clean from linux/modules folder from Dr. Yoder's exercises. 
+
+The file that was generated from my tests is entitled UnderLoad.png, for a load I used the make and make clean from linux/modules folder from Dr. Yoder's exercises. 
 
 The graph entitled NoLoad.png shows the difference between the no-rt and the PREEMPT_RT without any load put on the system.
