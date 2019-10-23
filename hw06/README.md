@@ -23,3 +23,11 @@ PREEMT_RT
 The file that was generated from my tests is entitled UnderLoad.png, for a load I used the make and make clean from linux/modules folder from Dr. Yoder's exercises. 
 
 The graph entitled NoLoad.png shows the difference between the no-rt and the PREEMPT_RT without any load put on the system.
+
+## Prof. Yoder's comments
+I expected the under load plots to look more different.
+
+Late: -1
+Grade:  9/10
+
+Project wiki is missing.
