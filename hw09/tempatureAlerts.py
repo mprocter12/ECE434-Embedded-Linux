@@ -4,11 +4,6 @@
 # ECE434
 # Homework 9
 
-# while True:
-
-
-#     pass
-
 from __future__ import print_function
 import pickle
 import os.path
@@ -30,7 +25,7 @@ bus = smbus.SMBus(2)
 tempSensors = [0x48, 0x49]
 
 def main():
-     """Shows basic usage of the Sheets API.
+        """Shows basic usage of the Sheets API.
     Writes values to a sample spreadsheet.
     """
     store = file.Storage('tokenPython.json')
@@ -55,13 +50,13 @@ def main():
                             # insertDataOption='INSERT_ROWS'
                             body=body
                             ).execute()
-    
+
     updates = result.get('updates', [])
     # print(updates)
 
     if not updates:
         print('Not updated')
 
-
 if __name__ == '__main__':
     main()
+# [END sheets_quickstart]
