@@ -2,46 +2,66 @@
 
 # Mark Procter
 # ECE434
-# Homework 3
+# Homework 9
 
-import Adafruit_BBIO.GPIO as GPIO
+# while True:
+
+
+#     pass
+
+from __future__ import print_function
+import pickle
+import os.path
+from googleapiclient.discovery import build
+from google_auth_oauthlib.flow import InstalledAppFlow
+from google.auth.transport.requests import Request
 import smbus
 import time
 
-def handleTempAlarm(alert):
-    print("Alert Signal Received")
-    if(alert==ALRM[0]):
-        tempC0 = bus.read_byte_data(tempSensors[0], 0)
-        tempF0 = tempC0*(9/5)+32
-        print('Temperature alarm triggered at: ' + str(tempF0) + ' degrees Fahrenheit')
-        
-    if(GPIO.input(ALRM[0])):
-        print('Temparture alarm returned to normal')
-        
-    if(alert==ALRM[1]):
-        tempC1 = bus.read_byte_data(tempSensors[1], 0)
-        tempF1 = tempC1*(9/5)+32
-        print('Temperature alarm triggered at: ' + str(tempF1) + ' degrees Fahrenhei')
-        
-    if(GPIO.input(ALRM[1])):
-        print('Temparture alarm returned to normal')
-        
-        
+# If modifying these scopes, delete the file token.pickle.
+SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
+# The ID and range of a sample spreadsheet.
+SPREADSHEET_ID = '1ggW83WNoR0cbjVklPcgcfQbznsnnmuyi9GPFUNQnAJw'
+RANGE_NAME = 'A2'
 
 # temp sensor setup
 bus = smbus.SMBus(2)
 tempSensors = [0x48, 0x49]
-alarmTemp = 28
-ALRM = ["P9_11", "P9_12"]
 
-for alarm in ALRM:
-    GPIO.setup(alarm, GPIO.IN, pull_up_down = GPIO.PUD_UP)
-    GPIO.add_event_detect(alarm, GPIO.BOTH, callback=handleTempAlarm)
+def main():
+     """Shows basic usage of the Sheets API.
+    Writes values to a sample spreadsheet.
+    """
+    store = file.Storage('tokenPython.json')
+    creds = store.get()
+    if not creds or creds.invalid:
+        flow = client.flow_from_clientsecrets('credentials.json', SCOPES)
+        creds = tools.run_flow(flow, store)
+    service = build('sheets', 'v4', http=creds.authorize(Http()))
+
+    tempC0 = bus.read_byte_data(tempSensors[0], 0)
+    tempF0 = tempC0*(9/5)+32
+
+    # Call the Sheets API
+    # Compute a timestamp and pass the first two arguments
+    values = [ [time.time()/60/60/24+ 25569 - 4/24, sys.argv[1], sys.argv[2]]]
+    body = { 'values': values }
+    result = service.spreadsheets().values().append(spreadsheetId=SPREADSHEET_ID,
+                            range=RANGE_NAME,
+                            #  How the input data should be interpreted.
+                            valueInputOption='USER_ENTERED',
+                            # How the input data should be inserted.
+                            # insertDataOption='INSERT_ROWS'
+                            body=body
+                            ).execute()
     
-for address in tempSensors:
-    bus.write_byte_data(address, 3, 25)
-    bus.write_byte_data(address, 2, 24)
+    updates = result.get('updates', [])
+    # print(updates)
 
-while True:
-    pass
+    if not updates:
+        print('Not updated')
+
+
+if __name__ == '__main__':
+    main()
