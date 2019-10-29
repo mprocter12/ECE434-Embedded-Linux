@@ -7,3 +7,10 @@ Wrote ledwithBlynk.js to control USR3 LED with a virtual button, the LED wired t
 
 ## Project
 Here is our project wiki: https://elinux.org/ECE434_Smart_Mirror It will be updated more once we get moving along in our project. We are currently sourcing out the monitor and one-way glass to use.
+
+## Prof. Yoder's comments
+
+Grade:  10/10
+
+I fixed your project page so it would sort with the others.  (Grade: 9/10)
+
