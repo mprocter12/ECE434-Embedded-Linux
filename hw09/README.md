@@ -10,7 +10,7 @@ The code will log to this [sheet](https://docs.google.com/spreadsheets/d/1ggW83W
 
 
 ## Project Milestones
-I think our project has 3 big milestones to hit: acquiring the new image to use a monitor with the beaglebone, finishing the actual code, and building the mirror itself. The last two milestones can be done in parallel, but the first one is definitely needed in order to get started on the other two. 
+I think our project has 4 big milestones to hit: acquiring the new image to use a monitor with the beaglebone, setting up the webpage for the proper display, finishing the actual code, and building the mirror itself. The last two milestones can be done in parallel, but the first one is definitely needed in order to get started on the other two. 
 
 I think we can outline it as so:
 
