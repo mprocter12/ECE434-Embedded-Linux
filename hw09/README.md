@@ -18,3 +18,10 @@ I think we can outline it as so:
 - Setup initial state for a webpage layout (Due 11/8)
 - Button up back end code for mirror (Due 11/15)
 - Finish mirror assembly and make it look pretty (Due 11/18)
+
+## Prof. Yoder's comments
+
+Looks good.  Thanks for the update
+
+No ThingSpeak:  -2
+Grade:  8/10
